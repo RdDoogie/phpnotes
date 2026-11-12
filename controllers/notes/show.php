@@ -13,7 +13,7 @@ $currentUserId = 1;
         'id' => $_GET['id']
     ])->findOrFail();
 
-    authorize($note['user_id'] == $currentUserId);
+    authorize((int) $note['user_id'] === $currentUserId);
 
     view("notes/show.view.php", [
         'heading' => 'Note',
