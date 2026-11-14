@@ -26,11 +26,12 @@
                     </button>
 
                     <!-- Profile dropdown -->
-                    <?php if ($_SESSION['user'] ?? false) : ?>
-                        <span class="text-white"><?= htmlspecialchars($_SESSION['user']['email']) ?></span>
-                    <?php else : ?>
-                        <a href="/register" class="text-white">Register</a>
-                    <?php endif; ?>
+                    <div class="relative ml-3">
+                        <?php if ($_SESSION['user'] ?? false) : ?>
+                            <span class="text-white"><?= htmlspecialchars($_SESSION['user']['name']) ?></span>
+                        <?php else : ?>
+                            <a href="/register" class="text-white">Register</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

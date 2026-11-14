@@ -11,14 +11,17 @@
                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
                             <div>
                                 <label
-                                    for="body"
+                                    for="register"
                                     class="block text-sm font-medium text-gray-700"
-                                >Body</label>
+                                >Register</label>
 
                                 <div class="mt-1">
                                     <label for="name">
                                         <input type="text" placeholder="Username" class ="mt-5" id="name" name="name" required>
                                     </label>
+                                    <?php if (isset($errors['name'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['name'] ?></p>
+                                    <?php endif; ?>
                                     <label for="email">
                                         <input type="email" placeholder="email" class ="mt-5" id="email" name="email" required>
                                     </label>
