@@ -10,7 +10,6 @@ $name =  $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-// 1. Buscar la nota. Ahora el id viene de $_POST, porque es un formulario
 $errors = [];
 
 if (! Validator::string($name, 5, 20)) {
@@ -33,7 +32,6 @@ if (! empty($errors)) {
     ]);
 }
 
-// 2. Autorizar: ¿es tuya?
 $user = $db->query('select * from users where email = :email', [
     'email' => $email
 ])->find();
@@ -49,9 +47,10 @@ $db->query('INSERT INTO users(name, email, password) VALUES (:name, :email, :pas
     'password' => password_hash($password, PASSWORD_BCRYPT)
 ]);
 
+
 $_SESSION['user'] = [
+    'name' => $name,
     'email' => $email
 ];
-
 header('location: /');
 exit();
