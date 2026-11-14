@@ -6,7 +6,7 @@ use Core\Validator;
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 1;
+$currentUserId = $_SESSION['user']['id'];
 
 // 1. Buscar la nota. Ahora el id viene de $_POST, porque es un formulario
 $note = $db->query('select * from note where id = :id', [

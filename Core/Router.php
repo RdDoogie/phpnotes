@@ -1,6 +1,7 @@
 <?php
 
 namespace Core;
+use Core\Middleware\Middleware;
 
 class Router
 {
@@ -13,7 +14,12 @@ class Router
 
         return $this;
     }
+    public function only(string $key): static
+    {
+        $this->routes[array_key_last($this->routes)]->middleware = $key;
 
+        return $this;
+    }
     public function get(string $uri, string $controller): static
     {
         return $this->add('GET', $uri, $controller);
@@ -43,6 +49,8 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route->uri === $uri && $route->method === strtoupper($method)) {
+                Middleware::resolve($route->middleware);
+
                 return require base_path($route->controller);
             }
         }

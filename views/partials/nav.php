@@ -29,8 +29,14 @@
                     <div class="relative ml-3">
                         <?php if ($_SESSION['user'] ?? false) : ?>
                             <span class="text-white"><?= htmlspecialchars($_SESSION['user']['name']) ?></span>
+
+                            <form method="POST" action="/session" class="inline ml-3">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="text-white text-sm">Log Out</button>
+                            </form>
                         <?php else : ?>
                             <a href="/register" class="text-white">Register</a>
+                            <a href="/login" class="text-white ml-3">Log In</a>
                         <?php endif; ?>
                     </div>
                 </div>

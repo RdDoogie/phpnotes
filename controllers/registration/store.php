@@ -32,9 +32,10 @@ if (! empty($errors)) {
     ]);
 }
 
-$user = $db->query('select * from users where email = :email', [
-    'email' => $email
-])->find();
+$user = $db->query('select * from users where email = :email',
+    ['email' => $email]
+)->find();
+login($user);
 
 if ($user) {
     header('location: /');
