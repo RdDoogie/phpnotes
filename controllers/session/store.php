@@ -38,3 +38,9 @@ if ($user && password_verify($password, $user['password'])) {
     header('location: /');
     exit();
 }
+
+$errors['email'] = 'No matching account found for that email address and password.';
+
+return view('session/create.view.php', [
+    'errors' => $errors
+]);
