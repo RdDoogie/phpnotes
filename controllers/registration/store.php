@@ -32,26 +32,29 @@ if (! empty($errors)) {
     ]);
 }
 
-$user = $db->query('select * from users where email = :email',
-    ['email' => $email]
-)->find();
-login($user);
+// ¿Ya existe? (aquí $user es false si es nuevo, y eso es lo normal)
+$user = $db->query('select * from users where email = :email', [
+    'email' => $email
+])->find();
 
 if ($user) {
     header('location: /');
     exit();
 }
 
+// Crearlo
 $db->query('INSERT INTO users(name, email, password) VALUES (:name, :email, :password)', [
     'name' => $name,
     'email' => $email,
     'password' => password_hash($password, PASSWORD_BCRYPT)
 ]);
 
-
-$_SESSION['user'] = [
-    'name' => $name,
+// Volver a buscarlo: ahora sí existe y tiene id
+$user = $db->query('select * from users where email = :email', [
     'email' => $email
-];
+])->find();
+
+login($user);
+
 header('location: /');
 exit();
