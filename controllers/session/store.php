@@ -24,7 +24,7 @@ if (! Validator::string($password, 7, 255)) {
 
 
 if (! empty($errors)) {
-    return view('registration/create.view.php', [
+    return view('session/create.view.php', [
         'errors' => $errors
     ]);
 }
@@ -38,10 +38,3 @@ if ($user && password_verify($password, $user['password'])) {
     header('location: /');
     exit();
 }
-
-$errors['email'] = 'No matching account found for that email address and password.';
-header('location: /');
-exit();
-
-
-
