@@ -16,13 +16,22 @@
                                 >Body</label>
 
                                 <div class="mt-1">
-                                    <label for="body">
-                                        <input type="email" placeholder="email" class ="mt-5">
+                                    <label for="name">
+                                        <input type="text" placeholder="Username" class ="mt-5" id="name" name="name" required>
                                     </label>
+                                    <label for="email">
+                                        <input type="email" placeholder="email" class ="mt-5" id="email" name="email" required>
+                                    </label>
+                                    <?php if (isset($errors['email'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['email'] ?></p>
+                                    <?php endif; ?>
                                     <br>
-                                    <label for = "body">
-                                        <input type="password" placeholder="password" class ="mt-5">
+                                    <label for = "password">
+                                        <input type="password" placeholder="password" class ="mt-5" id="password" name="password" required>
                                     </label>
+                                    <?php if (isset($errors['password'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['password'] ?></p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
