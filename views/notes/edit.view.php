@@ -6,7 +6,7 @@
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="mt-5 md:col-span-2 md:mt-0">
-                <form method="POST" action="/notes">
+                <form method="POST" action="/note">
                     <div class="shadow sm:overflow-hidden sm:rounded-md">
                         <input type="hidden" name="_method" value="PATCH">
                         <input type="hidden" name="id" value="<?= $note['id'] ?>">
@@ -24,7 +24,7 @@
                                         rows="3"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="Here's an idea for a note..."
-                                    ><?= htmlspecialchars($_POST['body'] ?? '') ?></textarea>
+                                    ><?= htmlspecialchars($_POST['body'] ??  $note['body']) ?></textarea>
 
                                     <?php if (isset($errors['body'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['body'] ?></p>
