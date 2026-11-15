@@ -3,6 +3,7 @@
 use Core\App;
 use Core\Database;
 use Core\Validator;
+use Core\Authenticator;
 
 $db = App::resolve(Database::class);
 
@@ -54,7 +55,8 @@ $user = $db->query('select * from users where email = :email', [
     'email' => $email
 ])->find();
 
-login($user);
+(new Authenticator)->login($user);
 
-header('location: /');
+redirect('/');
+
 exit();
