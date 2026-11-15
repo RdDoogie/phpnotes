@@ -66,4 +66,8 @@ class Router
 
         die();
     }
+    public function previousUrl(): string
+    {
+        return $_SERVER['HTTP_REFERER'];
+    }
 }

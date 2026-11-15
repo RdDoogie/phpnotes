@@ -17,7 +17,7 @@
 
                                 <div class="mt-1">
                                     <label for="email">
-                                        <input type="email" placeholder="email" class ="mt-5" id="email" value="<?= htmlspecialchars(old('email')) ?>"name="email" required>
+                                        <input type="email" placeholder="email" class ="mt-5" id="email" value="<?= htmlspecialchars(old('email')) ?>" name="email" required>
                                     </label>
                                     <?php if (isset($errors['email'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['email'] ?></p>
