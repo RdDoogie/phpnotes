@@ -58,5 +58,3 @@ $user = $db->query('select * from users where email = :email', [
 (new Authenticator)->login($user);
 
 redirect('/');
-
-exit();
