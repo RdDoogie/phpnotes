@@ -2,45 +2,27 @@
 
 use Core\App;
 use Core\Database;
-use Core\Validator;
-
-$db = App::resolve(Database::class);
+use Http\Forms\LoginForm;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$errors = [];
+$form = new LoginForm();
 
+if ($form->validate($email, $password)) {
+    $user = App::resolve(Database::class)
+        ->query('select * from users where email = :email', ['email' => $email])
+        ->find();
 
+    if ($user && password_verify($password, $user['password'])) {
+        login($user);
+        header('location: /');
+        exit();
+    }
 
-if (! Validator::email($email)) {
-    $errors['email'] = 'Please provide a valid email address.';
+    $form->error('email', 'No matching account found for that email address and password.');
 }
-
-if (! Validator::string($password, 7, 255)) {
-    $errors['password'] = 'Please provide a password of at least seven characters.';
-}
-
-
-
-if (! empty($errors)) {
-    return view('session/create.view.php', [
-        'errors' => $errors
-    ]);
-}
-
-$user = $db->query('select * from users where email = :email', [
-    'email' => $email
-])->find();
-
-if ($user && password_verify($password, $user['password'])) {
-    login($user);
-    header('location: /');
-    exit();
-}
-
-$errors['email'] = 'No matching account found for that email address and password.';
 
 return view('session/create.view.php', [
-    'errors' => $errors
+    'errors' => $form->errors()
 ]);
