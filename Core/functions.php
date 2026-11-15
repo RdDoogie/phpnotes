@@ -17,6 +17,11 @@ function dd($value)
 
     die();
 }
+
+function old(string $key, string $default = ''): string
+{
+    return Core\Session::get('old')[$key] ?? $default;
+}
 function redirect(string $path): never
 {
     header("location: {$path}");
