@@ -4,5 +4,21 @@
       "Core\\": "Core/",
       "Http\\": "Http/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "illuminate/collections": "*"
+  },
+  "require-dev": {
+    "pestphp/pest": "^4.7"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
   }
 }
