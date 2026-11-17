@@ -3,12 +3,10 @@
 use App\DAO\NoteDAO;
 use App\DTO\NoteDTO;
 use Core\App;
-use Core\Database;
 use Core\Validator;
 
 $dao = App::resolve(NoteDAO::class);
 
-$currentUserId = $_SESSION['user']['id'];
 
 // 1. Buscar la nota. Ahora el id viene de $_POST, porque es un formulario
 $note = App::resolve(NoteDAO::class)->findById((int) $_POST['id']) ?? abort();
@@ -36,5 +34,4 @@ if (count($errors)) {
 $dao->update(new NoteDTO($note->id, $_POST['body'], $note->userId));
 
 // 5. Redirigir (PRG)
-header('location: /notes');
-die();
+redirect('/notes');
