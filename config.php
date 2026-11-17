@@ -7,7 +7,7 @@ return [
         'dbname' => 'myapp',
         'charset' => 'utf8mb4'
     ],
-
+    'dao' => 'mysql',
     'username' => 'root',
     'password' => 'alumne'
 ];

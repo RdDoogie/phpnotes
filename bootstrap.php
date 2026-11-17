@@ -17,10 +17,16 @@ $container->bind(Database::class, function () {
 });
 
 use App\DAO\NoteDAO;
-use App\DAO\PdoNoteDAO;
 
-$container->bind(NoteDAO::class, fn () => new PdoNoteDAO(
-    $container->resolve(Database::class)
-));
+
+
+
+use App\DAO\DAOFactory;
+
+$container->bind(NoteDAO::class, function () {
+    $config = require base_path('config.php');
+
+    return DAOFactory::noteDAO($config['dao']);
+});
 
 App::setContainer($container);
