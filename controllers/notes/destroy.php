@@ -1,24 +1,14 @@
 <?php
 
+use App\DAO\NoteDAO;
 use Core\App;
-use Core\Database;
 
-$db = App::resolve(Database::class);
+$dao = App::resolve(NoteDAO::class);
 
-$currentUserId = $_SESSION['user']['id'];
+$note = $dao->findById((int) $_POST['id']) ?? abort();
 
+authorize($note->userId === $_SESSION['user']['id']);
 
-    $note = $db->query('select * from note where id = :id', [
-        'id' => $_POST['id']
-    ])->findOrFail();
+$dao->delete($note->id);
 
-    authorize((int) $note['user_id'] === $currentUserId);
-
-    $db ->query('delete from note where id = :id', [
-        'id' => $_POST['id']
-    ]);
-    header('location: /notes');
-    exit();
-
-
-
+redirect('/notes');

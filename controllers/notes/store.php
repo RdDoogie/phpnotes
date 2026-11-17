@@ -21,10 +21,9 @@ if (! empty($errors)) {
 }
 
 if (empty($errors)) {
-    $db->query('INSERT INTO note(body, user_id) VALUES(:body, :user_id)', [
-        'body' => $_POST['body'],
-        'user_id' => $_SESSION['user']['id']
-    ]);
-    header('location: /notes');
-    die();
+    App::resolve(NoteDAO::class)->create(
+        new NoteDTO(null, $_POST['body'], $_SESSION['user']['id'])
+    );
+
+    redirect('/notes');
 }

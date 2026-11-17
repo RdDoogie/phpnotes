@@ -1,23 +1,13 @@
 <?php
 
+use App\DAO\NoteDAO;
 use Core\App;
-use Core\Database;
-use App\DTO\NoteDTO;
 
+$note = App::resolve(NoteDAO::class)->findById((int) $_GET['id']) ?? abort();
 
-$db = App::resolve(Database::class);
-
-$currentUserId = $_SESSION['user']['id'];
-
-$note = NoteDTO::fromArray(
-    $db->query('select * from note where id = :id', ['id' => $_GET['id']])->findOrFail()
-);
-
-authorize($note->userId === $currentUserId);
+authorize($note->userId === $_SESSION['user']['id']);
 
 view('notes/show.view.php', [
     'heading' => 'Note',
     'note' => $note
 ]);
-
-

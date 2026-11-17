@@ -16,4 +16,11 @@ $container->bind(Database::class, function () {
     );
 });
 
+use App\DAO\NoteDAO;
+use App\DAO\PdoNoteDAO;
+
+$container->bind(NoteDAO::class, fn () => new PdoNoteDAO(
+    $container->resolve(Database::class)
+));
+
 App::setContainer($container);
