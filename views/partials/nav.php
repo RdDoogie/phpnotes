@@ -33,6 +33,7 @@
                             <form method="POST" action="/session" class="inline ml-3">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button class="text-white text-sm">Log Out</button>
+                                <a href="/profile" class="text-white ml-3">Profile</a>
                             </form>
                         <?php else : ?>
                             <a href="/register" class="text-white">Register</a>

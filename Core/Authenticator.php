@@ -2,15 +2,17 @@
 
 namespace Core;
 
+use App\DAO\PdoUserDAO;
+use App\DAO\UserDAO;
+use App\DTO\UserDTO;
+
 class Authenticator
 {
     public function attempt(string $email, string $password): bool
     {
-        $user = App::resolve(Database::class)
-            ->query('select * from users where email = :email', ['email' => $email])
-            ->find();
+        $user = App::resolve(UserDAO::class)->findByEmail($email);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user->password)) {
             $this->login($user);
 
             return true;
@@ -19,14 +21,13 @@ class Authenticator
         return false;
     }
 
-    public function login(array $user): void
+    public function login(UserDTO $user): void
     {
         $_SESSION['user'] = [
-            'id' => $user['id'],
-            'name' => $user['name'],
-            'email' => $user['email'],
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
         ];
-
         session_regenerate_id(true);
     }
 

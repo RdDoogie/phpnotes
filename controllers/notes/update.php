@@ -7,7 +7,6 @@ use Core\Validator;
 
 $dao = App::resolve(NoteDAO::class);
 
-
 // 1. Buscar la nota. Ahora el id viene de $_POST, porque es un formulario
 $note = App::resolve(NoteDAO::class)->findById((int) $_POST['id']) ?? abort();
 
