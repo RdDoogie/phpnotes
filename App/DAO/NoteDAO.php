@@ -16,4 +16,6 @@ interface NoteDAO
     public function update(NoteDTO $note): void;
 
     public function delete(int $id): void;
+
+    public function countByUser(int $userId): int;
 }

@@ -41,4 +41,9 @@ class InMemoryNoteDAO implements NoteDAO
     {
         unset($this->notes[$id]);
     }
+
+    public function countByUser(int $userId): int
+    {
+        return count($this->findByUser($userId));
+    }
 }

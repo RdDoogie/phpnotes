@@ -46,12 +46,4 @@ class PdoUserDAO implements UserDAO
             'id' => $id
         ]);
     }
-
-    public function countNotesByUser(int $user_Id):int //$userId): int
-    {
-        $nOfNotes = $this->db->query('select COUNT(user_id) from note where user_id = :$user_id', [
-            'user_id' => $user_Id
-        ])->find();
-        return (int) $nOfNotes;
-    }
 }

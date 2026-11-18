@@ -21,3 +21,16 @@ test('it deletes a note', function () {
 
     expect($dao->findById($id))->toBeNull();
 });
+
+test('It counts users by note', function () {
+    $dao = new InMemoryNoteDAO();
+
+    $id = $dao->create(new NoteDTO(null, 'Hola', 1));
+    $dao->create(new NoteDTO(null, 'De otro', 2));
+    $dao->create(new NoteDTO(null, 'Joan', 2));
+    $dao->create(new NoteDTO(null, 'Cabesa', 1));
+
+
+    expect($dao->countByUser(1))->toBe(2)
+        ->and($dao->countByUser(2))->toBe(2);
+});

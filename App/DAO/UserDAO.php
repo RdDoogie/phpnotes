@@ -13,5 +13,4 @@ interface UserDAO
 
     public function create(UserDTO $user): int;
     //public function countByUser(int $userId): int;
-    public function countNotesByUser(int $user_Id): int;
 }

@@ -51,4 +51,13 @@ class PdoNoteDAO implements NoteDAO
             'id' => $id
         ]);
     }
+
+    public function countByUser(int $userId): int
+    {
+        $row = $this->db->query('select count(*) as total from note where user_id = :user_id', [
+            'user_id' => $userId
+        ])->find();
+
+        return (int) $row['total'];
+    }
 }
